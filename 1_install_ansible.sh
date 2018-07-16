@@ -16,3 +16,18 @@ sudo apt update
 echo
 echo 'installing ansible'
 sudo apt -y install ansible
+
+echo 'verify ansible installation'
+ansible --version
+
+echo
+if [ $? -eq 0 ] 
+then
+	echo '*** Ansible installed successful ***'
+else
+	echo '=== Error installing Ansible. Please review log/output ==='
+fi
+
+return $?
+
+

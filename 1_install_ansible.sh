@@ -35,9 +35,11 @@ ansible --version
 echo
 if [ $? -eq 0 ] 
 then
-	echo '*** Ansible installed successful ***'
+	echo '*** Ansible installed successfuly ***'
 	
 	install_ansible_galaxy_prereqs
+	
+	ansible-playbook localhost -K playbook.yml
 	
 else
 	echo '=== Error installing Ansible. Please review log/output ==='

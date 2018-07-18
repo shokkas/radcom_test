@@ -1,0 +1,6 @@
+---
+- name: Install Docker
+  hosts: localhost
+  become: true
+  roles:
+  - { role: '/etc/ansible/roles/nickjj.docker', tags: "docker"}

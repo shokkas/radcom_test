@@ -5,7 +5,7 @@ function install_ansible_galaxy_prereqs () {
 	echo
 	echo 'installing ansible roles from galaxy'
 	echo 'installing docker role'
-	ansible-galaxy install --roles-path=/etc/ansible/roles/ nickjj.docker
+	ansible-galaxy install --force --roles-path=/etc/ansible/roles/ nickjj.docker
 }
 
 # Main
@@ -39,7 +39,7 @@ then
 	
 	install_ansible_galaxy_prereqs
 	
-	ansible-playbook localhost -K playbook.yml
+	ansible-playbook -K playbook.yml
 	
 else
 	echo '=== Error installing Ansible. Please review log/output ==='

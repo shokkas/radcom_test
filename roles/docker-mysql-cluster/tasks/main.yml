@@ -1,46 +1,16 @@
 ---
 
 - name: Create docker network
-  docker_network:
-    name: mysql-cluster
-    ipam_options:
-      subnet: '10.0.0.0/16'
-
+  command: docker network create mysql-cluster --subnet=10.0.0.0/16 || true
 
 - name: Create mysql-cluster management node
-  docker_container:
-    name: mysql-mgmt
-    image: mysql/mysql-cluster
-    command: ndb_mgmd
-    networks:
-      - name: mysql-cluster
-        ipv4_address: "10.0.0.1"
+  command: docker run -d --net=mysql-cluster --name=mysql-mgmt --ip=10.0.0.11 mysql/mysql-cluster ndb_mgmd
 
 - name: Create mysql-cluster data node
-  docker_container:
-    name: mysql-data1
-    image: mysql/mysql-cluster
-    command: ndbd
-    networks:
-      - name: mysql-cluster
-        ipv4_address: "10.0.0.2"
-  
+  command: docker run -d --net=mysql-cluster --name=mysql-data1 --ip=10.0.0.12 mysql/mysql-cluster ndbd
+
 - name: Create mysql-cluster data node
-  docker_container:
-    name: mysql-data1
-    image: mysql/mysql-cluster
-    command: ndbd
-    networks:
-      - name: mysql-cluster
-        ipv4_address: "10.0.0.3"
-  
+  command: docker run -d --net=mysql-cluster --name=mysql-data2 --ip=10.0.0.13 mysql/mysql-cluster ndbd
+
 - name: Create mysql-cluster server node
-  docker_container:
-    name: mysql-srv1
-    image: mysql/mysql-cluster
-    command: mysqld
-    networks:
-      - name: mysql-cluster
-        ipv4_address: "10.0.0.10"
-    env:
-        MYSQL_ROOT_PASSWORD="123456"
+  command: docker run -d --net=mysql-cluster --name=mysql-srv1 --ip=10.0.0.1 -e MYSQL_ROOT_PASSWORD="123456" mysql/mysql-cluster mysqld

@@ -7,3 +7,11 @@
       name: nickjj.docker
     vars:    
       docker_version: "18.05.0"
+
+- name: Spin up mysql-cluster
+  hosts: localhost
+  become: true
+  roles:
+  - docker-mysql-cluster
+  tags:
+    mysql-cluster

@@ -1,5 +1,7 @@
 #!/bin/sh
 
+returnVal = 0
+
 # updating packages
 echo
 echo 'updating packages'
@@ -20,14 +22,26 @@ sudo apt -y install ansible
 echo 'verify ansible installation'
 ansible --version
 
+
 echo
 if [ $? -eq 0 ] 
 then
 	echo '*** Ansible installed successful ***'
+	
+	install_ansible_galaxy_prereqs
+	
 else
 	echo '=== Error installing Ansible. Please review log/output ==='
+	returnVal = $?
 fi
 
-return $?
+return $returnVal
 
 
+function install_ansible_galaxy_prereqs () {
+
+	echo
+	echo 'installing ansible roles from galaxy'
+	echo 'installing docker role'
+	ansible-galaxy install nickjj.docker
+}

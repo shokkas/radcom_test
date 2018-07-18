@@ -5,7 +5,7 @@ function install_ansible_galaxy_prereqs () {
 	echo
 	echo 'installing ansible roles from galaxy'
 	echo 'installing docker role'
-	ansible-galaxy install nickjj.docker
+	ansible-galaxy install --roles-path=/etc/ansible/roles/ nickjj.docker
 }
 
 # Main
@@ -44,6 +44,6 @@ else
 	returnVal = $?
 fi
 
-return $returnVal
+exit $returnVal
 
 

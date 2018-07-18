@@ -1,5 +1,14 @@
 #!/bin/sh
 
+function install_ansible_galaxy_prereqs () {
+
+	echo
+	echo 'installing ansible roles from galaxy'
+	echo 'installing docker role'
+	ansible-galaxy install nickjj.docker
+}
+
+# Main
 returnVal = 0
 
 # updating packages
@@ -38,10 +47,3 @@ fi
 return $returnVal
 
 
-function install_ansible_galaxy_prereqs () {
-
-	echo
-	echo 'installing ansible roles from galaxy'
-	echo 'installing docker role'
-	ansible-galaxy install nickjj.docker
-}

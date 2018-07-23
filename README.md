@@ -1,5 +1,5 @@
 # rd_test
-Goals: set docker on fresh ubunto, install docker, run mysql conainer.
+Goals: set docker on fresh ubunto, install docker using ansible, run mysql conainer using ansible.
 
 ### steps
 1. clone repo to fresh ubuntu 18.04 server
